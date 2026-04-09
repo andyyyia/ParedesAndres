@@ -6,14 +6,10 @@ class Program
     {
         int[] vectorOriginal = LeerVector();
 
-        // ===================================
-        // PARTE 1: SOLUCIÓN REFACTORIZADA
-        // ===================================
-
         int[] indicesAscendentes = ObtenerIndicesOrdenados(vectorOriginal, true);
         int[] indicesDescendentes = ObtenerIndicesOrdenados(vectorOriginal, false);
 
-        Console.WriteLine("\n===== PARTE 1: SOLUCIÓN REFACTORIZADA =====");
+        Console.WriteLine("\n===== PARTE 1 =====");
 
         Console.WriteLine("\nVector ordenado ascendente:");
         ImprimirVectorOrdenado(vectorOriginal, indicesAscendentes);
@@ -21,22 +17,16 @@ class Program
         Console.WriteLine("\nVector ordenado descendente:");
         ImprimirVectorOrdenado(vectorOriginal, indicesDescendentes);
 
-        // ========================================
-        // PARTE 2: NUEVA SOLUCIÓN (ALGORITMO)
-        // ========================================
-
         int[] indicesAscBurbuja = ObtenerIndicesOrdenadosBurbuja(vectorOriginal, true);
         int[] indicesDescBurbuja = ObtenerIndicesOrdenadosBurbuja(vectorOriginal, false);
 
-        Console.WriteLine("\n===== PARTE 2: NUEVA SOLUCIÓN (ALGORITMO) =====");
+        Console.WriteLine("\n===== PARTE 2 =====");
 
         Console.WriteLine("\nVector ordenado ascendente:");
         ImprimirVectorOrdenado(vectorOriginal, indicesAscBurbuja);
 
         Console.WriteLine("\nVector ordenado descendente:");
         ImprimirVectorOrdenado(vectorOriginal, indicesDescBurbuja);
-
-        Console.WriteLine("")
     }
 
     static int[] LeerVector()
@@ -97,6 +87,7 @@ class Program
 
         return indicesOrdenados;
     }
+
     static void ImprimirVectorOrdenado(int[] vector, int[] indices)
     {
         for (int i = 0; i < indices.Length; i++)
@@ -151,18 +142,37 @@ class Program
         vector[posicionB] = temporal;
     }
 
-
     // ==============================
     // PARTE 3: JUSTIFICACIÓN
     // ==============================
     //
     // 1. Cambios realizados:
-    // - ...
+    // - Se mejoraron los nombres de variables y métodos para que el código
+    //   sea más claro y legible.
+    // - Se separó la lógica en métodos independientes para evitar que todo
+    //   quede dentro de Main.
+    // - Se eliminó la duplicación del código de ordenamiento ascendente y
+    //   descendente mediante el uso del parámetro ascendente.
+    // - Se evitó el uso de valores como 999999 y -999999, lo cual
+    //   hace la solución más segura y general.
     //
     // 2. Decisiones de diseño:
-    // - ...
+    // - Se mantuvo intacto el vector original, cumpliendo la restricción del
+    //   ejercicio.
+    // - Se trabajó exclusivamente con índices para representar el orden.
+    // - Cada método tiene una única responsabilidad: leer datos, ordenar,
+    //   crear índices, intercambiar e imprimir.
+    // - La solución es más reutilizable porque la lógica principal no depende
+    //   de estar escrita directamente en consola.
     //
     // 3. Explicación del nuevo algoritmo:
-    // - ...
+    // - La nueva solución utiliza el algoritmo de burbuja sobre un vector de
+    //   índices.
+    // - Primero se genera un vector con los índices del vector original.
+    // - Luego se comparan los valores del vector original usando esos índices.
+    // - Cuando dos elementos están fuera de orden, se intercambian únicamente
+    //   los índices, sin modificar el vector original.
+    // - De esta forma se logra ordenar ascendente o descendentemente respetando
+    //   todas las restricciones planteadas.
     //
 }
