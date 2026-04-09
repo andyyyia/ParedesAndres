@@ -10,6 +10,9 @@ class Program
 
         int[] vectorOriginal = LeerVector();
 
+        int[] indicesAscendentes = ObtenerIndicesOrdenados(vectorOriginal, true);
+        int[] indicesDescendentes = ObtenerIndicesOrdenados(vectorOriginal, false);
+
 
         // ========================================
         // PARTE 2: NUEVA SOLUCIÓN (ALGORITMO)
@@ -32,6 +35,47 @@ class Program
         }
 
         return vector;
+    }
+
+    static int[] ObtenerIndicesOrdenados(int[] vector, bool ascendente)
+    {
+        int cantidad = vector.Length;
+        int[] indicesOrdenados = new int[cantidad];
+        bool[] usados = new bool[cantidad];
+        int k = 0;
+
+        while (k < cantidad)
+        {
+            int mejorIndice = -1;
+
+            for (int i = 0; i < cantidad; i++)
+            {
+                if (usados[i] == false)
+                {
+                    if (mejorIndice == -1)
+                    {
+                        mejorIndice = i;
+                    }
+                    else
+                    {
+                        bool esMejor = ascendente
+                            ? vector[i] < vector[mejorIndice]
+                            : vector[i] > vector[mejorIndice];
+
+                        if (esMejor)
+                        {
+                            mejorIndice = i;
+                        }
+                    }
+                }
+            }
+
+            indicesOrdenados[k] = mejorIndice;
+            usados[mejorIndice] = true;
+            k++;
+        }
+
+        return indicesOrdenados;
     }
 
     // ==============================
